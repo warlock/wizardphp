@@ -1,0 +1,10 @@
+# MODES: development(Automatically creates tables), production
+mode : development
+# DEFAULT LANGUAGE
+language : en
+# DATABASE CONFIG
+class : mysql
+host  : localhost
+user  : user
+password : password
+database : database

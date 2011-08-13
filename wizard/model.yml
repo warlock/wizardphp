@@ -1,0 +1,21 @@
+# MODEL CONFIGURATION
+users:
+  mail : string
+  name : string
+  password : password
+  level : 0
+  _button : [submit, reset]
+sessions:
+  userid : string
+  cookie : string
+  time : string
+feeds:
+  _go_to : index.php
+  _go_update : feed.php
+  _go_destroy : index.php
+  name : string
+  category : string
+  country : string
+  language : string
+  format : string
+  _button : [submit, reset]

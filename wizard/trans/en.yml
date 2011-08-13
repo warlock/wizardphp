@@ -1,0 +1,30 @@
+# MODEL TRANSLATION: ENGLISH
+users:
+  mail : Email
+  name : Name
+  level : Level
+  password : Password
+  login : Login
+  submit : Register user
+  reset : Reset form
+  _go_update : Edit user
+  _go_destroy : Delete user
+feeds:
+  name : Name
+  aka : Aka
+  favico : Favico
+  category : Category
+  country : Country
+  language : Language
+  format : Format
+  htmlurl : Html_Url
+  xmlurl : Xml_Url
+  submit: Send
+  reset: Reset form
+  free : Free
+  partner : Partner
+  _go_update : Edit
+  _go_destroy : Delete
+extras:
+  crear : Create a new feed
+  llista : Go to list
