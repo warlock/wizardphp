@@ -22,6 +22,9 @@ if ($wizard_config['mode'] == "development") {
 						case "text":
 							$query_data = "ALTER TABLE ".$table_name." ADD ".$key." TEXT";
 							break;
+						case "wysiwyg":
+							$query_data = "ALTER TABLE ".$table_name." ADD ".$key." TEXT";
+							break;
 						default:
 							$query_data = "ALTER TABLE ".$table_name." ADD ".$key." VARCHAR(255)";
 					}
@@ -50,6 +53,9 @@ if ($wizard_config['mode'] == "development") {
 							$query_data = $query_data.$key." VARCHAR(255), ";
 							break;
 						case "text":
+							$query_data = $query_data.$key." TEXT, ";
+							break;
+						case "wysiwyg":
 							$query_data = $query_data.$key." TEXT, ";
 							break;
 						default:

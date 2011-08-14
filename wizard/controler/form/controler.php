@@ -45,13 +45,20 @@ if ($id_update > 0) {
 						trans($wizard_model_name,$sub); ?> <input type="text" name="<? print $sub; ?>" value="<? print $valor[$sub]; ?>"><br><?
 						break;
 					case "password":
-						trans($wizard_model_name,$sub); ?> <input type="password" name="<? print $sub; ?>"><br><?
+						trans($wizard_model_name,$sub); ?> <input type="password" name="<? print $sub; ?>"><? print $valor[$sub] ?><br><?
 						break;
 					case "checkbox":
 						trans($wizard_model_name,$sub); ?> <input type="checkbox" name="<? print $sub; ?>"><? print $sub; ?><br><?
 						break;
 					case "text":
-						trans($wizard_model_name,$sub); ?> <textarea name="<? print $sub; ?>" rows="3" cols="20"></textarea><br><?
+						trans($wizard_model_name,$sub); ?> <textarea name="<? print $sub; ?>" rows="3" cols="20"><? print $valor[$sub] ?></textarea><br><?
+						break;
+					case "wysiwyg":
+						trans($wizard_model_name,$sub);
+						?><br><?
+						$CKEditor = new CKEditor();
+						$CKEditor->basePath = 'wizard/core/tools/ckeditor/';
+						$CKEditor->editor($sub, $valor[$sub]);
 						break;
 					case "radio":
 						// Under construction
