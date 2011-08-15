@@ -1,5 +1,5 @@
 <?
-// WizardPHP : Form Controler
+// WizardPHP : Form Controller
 $goto = $wizard_model[_go_to]; // URL that goes after "submit"
 if(isset($goto)) {
 	?><form method="post" action="<? print $goto; ?>"><?

@@ -1,5 +1,5 @@
 <?
-// WizardPHP : Show List controler...
+// WizardPHP : Show List controller...
 $keys = '';
 $makecolumns = '';
 $destroylock = 0;

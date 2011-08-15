@@ -1,5 +1,5 @@
 <?
-// WizardPHP : Test controler...
+// WizardPHP : Test controller...
 ?>Printing structure: <b><?
 print $wizard_model_name."</b><br>"; 
 foreach ($wizard_model as $name => $value) {
