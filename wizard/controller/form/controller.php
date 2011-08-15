@@ -94,5 +94,4 @@ if ($id_update > 0) {
 // Button to delete the row when editing.
 if ($id_update>0) {
 	?><form method="post" action="<? print $_go_destroy; ?>"><input type="hidden" name="action" value="destroy"><input type="hidden" name="form_id" value="<? print $wizard_model_name; ?>"><input type="hidden" name="id" value="<? if ($id_update > 0) { print $value['id']; } ?>"><input type="submit" value="<? trans($wizard_model_name,"_go_destroy"); ?>"></form></th>
-	ID UPDATE ES MES GRAN QUE O???
 <? } ?>
