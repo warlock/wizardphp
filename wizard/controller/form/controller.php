@@ -9,7 +9,7 @@ if(isset($goto)) {
 	?><form method="post" action="<? print "http://".$url.$page; ?>"><?
 }
 
-$id_update = func_get_arg(1); // Load the "id" of the row you want to modify.
+$id_update = $wizard_args[1]; // Load the "id" of the row you want to modify.
 if ($id_update > 0) {
 	$db = &ADONewConnection($wizard_config['class']);
 	$db->PConnect($wizard_config['host'],$wizard_config['user'],$wizard_config['password'],$wizard_config['database']);
