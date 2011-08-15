@@ -1,5 +1,5 @@
 <?
-// Controler defaults
+// Controller defaults
 global $wizard_model_complete;
 global $wizard_config;
 global $language;
