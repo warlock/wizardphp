@@ -9,13 +9,10 @@ sessions:
   userid : string
   cookie : string
   time : string
-feeds:
-  _go_to : index.php
-  _go_update : feed.php
-  _go_destroy : index.php
-  name : string
-  category : string
-  country : string
-  language : string
-  format : string
+news:
+  user : { select : name, model : users}
+  title : string
+  content : wysiwyg
+  description : text
   _button : [submit, reset]
+

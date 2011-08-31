@@ -12,27 +12,48 @@ if ($wizard_config['mode'] == "development") {
 			// TABLE EXISTS = ALTER TABLE
 			foreach ($wizard_model_complete[$table_name] as $key => $value) {
 				if(substr($key,0,1) != '_') {
-					switch ($value) {
-						case "string":
-							$query_data = "ALTER TABLE ".$table_name." ADD ".$key." VARCHAR(255)";
-							break;
-						case "password":
-							$query_data = "ALTER TABLE ".$table_name." ADD ".$key." VARCHAR(255)";
-							break;
-						case "text":
-							$query_data = "ALTER TABLE ".$table_name." ADD ".$key." TEXT";
-							break;
-						case "wysiwyg":
-							$query_data = "ALTER TABLE ".$table_name." ADD ".$key." TEXT";
-							break;
-						default:
-							$query_data = "ALTER TABLE ".$table_name." ADD ".$key." VARCHAR(255)";
+				if (is_array($value)) {
+					// SELECT 
+					foreach ($value as $key2 => $class2) {
+						switch ($key2) {
+							case "select":
+								$query_data2 = "ALTER TABLE ".$table_name." ADD ";
+								$actv = 1;
+								break;
+							case "model":
+								if ($actv == 1) {
+									$query_data = $query_data2.$class2." INT";
+								}
+						}
 					}
-					if ($table_name == "users") {
-						if ($key == "password") {
-							$query_data = "ALTER TABLE ".$table_name." ADD pass_crypt VARCHAR(255)";
-						} elseif ($key == "mail") {
-							$query_data = "ALTER TABLE ".$table_name." ADD mail_crypt VARCHAR(255)";
+				} else {
+						switch ($value) {
+							case "string":
+								$query_data = "ALTER TABLE ".$table_name." ADD ".$key." VARCHAR(255)";
+								break;
+							case "password":
+								$query_data = "ALTER TABLE ".$table_name." ADD ".$key." VARCHAR(255)";
+								break;
+							case "text":
+								$query_data = "ALTER TABLE ".$table_name." ADD ".$key." TEXT";
+								break;
+							case "wysiwyg":
+								$query_data = "ALTER TABLE ".$table_name." ADD ".$key." TEXT";
+								break;
+							default:
+								//$query_data = "ALTER TABLE ".$table_name." ADD ".$key." VARCHAR(255)";
+						}
+						if ($table_name == "users") {
+							if ($key == "password") {
+								$query_data = "ALTER TABLE ".$table_name." ADD pass_crypt VARCHAR(255)";
+							} elseif ($key == "mail") {
+								$query_data = "ALTER TABLE ".$table_name." ADD mail_crypt VARCHAR(255)";
+								$query_user = "ALTER TABLE ".$table_name." ADD activ INT";
+								$db->Execute($query_user);
+								$query_user = "ALTER TABLE ".$table_name." ADD expiration INT";
+								$db->Execute($query_user);
+							}
+							
 						}
 					}
 					$db->Execute($query_data);

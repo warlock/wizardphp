@@ -1,15 +1,16 @@
 <?
 // WizardPHP : Form Controller
 
-if(isset($wizard_model[_go_to])) { // URL that goes after "submit"
-	?><form method="post" action="<? print $wizard_model[_go_to]; ?>"><?
+if(isset($wizard_model['_go_to'])) { // URL that goes after "submit"
+	?><form method="post" action="<? print $wizard_model['_go_to']; ?>"><?
 } else {
-	$url = $_SERVER['SERVER_NAME']; 
-	$page = $_SERVER['PHP_SELF']; 
-	?><form method="post" action="<? print "http://".$url.$page; ?>"><?
+	?><form method="post" action="?"><?
 }
-
-$id_update = $wizard_args[1]; // Load the "id" of the row you want to modify.
+if (func_num_args() > 1) {
+	$id_update = $wizard_args['1']; // Load the "id" of the row you want to modify.
+} else {
+	$id_update = 0;
+}
 if ($id_update > 0) {
 	$db = &ADONewConnection($wizard_config['class']);
 	$db->PConnect($wizard_config['host'],$wizard_config['user'],$wizard_config['password'],$wizard_config['database']);
@@ -78,13 +79,52 @@ if ($id_update > 0) {
 						<br><?
 						break;
 					default:
-						// It ensures that there is some direction after removing the row.
-						if ($key == "_go_destroy") {
-                        	$_go_destroy = $class;
-                            $destroylock = 1;
-                        } else {
-                        	if ($destroylock == 0) {
-                            	$_go_destroy = "?";
+						if (is_array($class)) { 
+							foreach ($class as $key2 => $class2) {
+								switch ($key2) {
+									case "select":
+										$keys = $class2;
+										$query = "select id,".$keys." from ".$class[model];
+										$db = &ADONewConnection($wizard_config['class']);
+										$db->PConnect($wizard_config['host'],$wizard_config['user'],$wizard_config['password'],$wizard_config['database']);
+										$result = $db->Execute($query);
+										trans($wizard_model_name,$key);  ?>
+										<SELECT NAME="<? print $key; ?>" SIZE="1">
+											<?
+											while (!$result->EOF) {
+											?> 
+											<OPTION VALUE="<?  print $result->fields[id]; ?>" <? 
+											 if ($id_update > 0) {
+												if ($result->fields[id] == $value[$key]) {
+													print "SELECTED";
+												} 
+											 }
+											 ?> > <?  print $result->fields[$keys]; ?></OPTION>
+											<?
+											$result->MoveNext();
+											}
+											$db->Close();
+											?>
+										</SELECT><br>
+										<?
+										break;
+									case "count":
+										$table = $class2;
+										$query = "select count(*) from ".$table;
+										print $query."<br>";
+										break;
+								}
+								
+							}
+						} else {
+							// It ensures that there is some direction after removing the row.
+							if ($key == "_go_destroy") {
+                        		$_go_destroy = $class;
+                            	$destroylock = 1;
+                        	} else {
+                        		if ($destroylock == 0) {
+                            		$_go_destroy = "?";
+                            	}
                             }
                 		}
 				}

@@ -39,7 +39,30 @@ while (!$result->EOF) {
 	?><tr><?
 	foreach ( $wizard_model as $type => $value_type) {
 		if(substr($type,0,1) != '_') {
-        	?><TH><?  print $result->fields[$type]; ?></TH><?
+			if (is_array($value_type)) {
+			//print $type."es un array<br>";
+			//
+				foreach ($value_type as $key2 => $class2) {
+					switch ($key2) {
+						case "select":
+							$keys_select = $class2;
+							$actv = 1;
+							break;
+						case "model":
+							if ($actv == 1) {
+								$keys_model = $class2;
+								$actv = 2;
+							}
+					}
+					if ($actv == 2) {
+					$query_select = "select ".$keys_select." from ".$keys_model." where id = ".$result->fields[$type];
+					$result_select = $db->Execute($query_select);
+					?><TH><? print $result_select->fields[$keys_select]; ?></TH><?
+					}
+				}
+			} else {
+        		?><TH><?  print $result->fields[$type]; ?></TH><?
+        	}
 		}
 	}
 	// Update and Destroy buttons...

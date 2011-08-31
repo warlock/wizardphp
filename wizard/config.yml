@@ -8,3 +8,7 @@ host  : localhost
 user  : user
 password : password
 database : database
+# USER MANAGER: Verification mail
+from  : wizard@wizardphp.com
+title : 'Email Verification'
+message: 'Verify your email address:'

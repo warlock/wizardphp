@@ -63,6 +63,7 @@ if (count($_POST) > 1) {
 				}
 			case "mail":
 				if ($form_id == "users" && $input_name == "mail") {
+					$mail_ver = $input_value;
 					$mailcrypt = sha1($input_value);
 				}
 			default:
@@ -84,8 +85,13 @@ if (count($_POST) > 1) {
 				$db->PConnect($wizard_config['host'],$wizard_config['user'],$wizard_config['password'],$wizard_config['database']);
 				$dbs = $db->Execute($select_login);
 				if (!$dbs->EOF) {
+					$activ = $dbs->fields[activ];
+					if ($activ == '1') {
 					$newsess = "insert into sessions (userid, cookie, time) values ('".$dbs->fields[id]."', '".$_COOKIE[sToken]."', '".time()."')";
 					$db->Execute($newsess);
+					} else {
+						print "<b>Please verify your mail!</b><br>";	
+					}
 				} else {
 					print "<b>User or password incorrect!</b><br>";
 				}
@@ -95,7 +101,15 @@ if (count($_POST) > 1) {
 		case "create":
 			if ($form_id == "users") {
 				$default_level = $wizard_model_complete[users][level];
-				$postsend = $postsend." (".$post_keys." pass_crypt, mail_crypt, level) values (".$post_values." '".$passcrypt."', '".$mailcrypt."', '".$default_level."')";
+				$expiration = time() + 604800;
+				$postsend = $postsend." (".$post_keys." pass_crypt, mail_crypt, level, activ, expiration) values (".$post_values." '".$passcrypt."', '".$mailcrypt."', '".$default_level."', '0', '".$expiration."')";
+				// Mail verification
+				$url_mail = $_SERVER['HTTP_REFERER'];
+				$t_url = rtrim($url_mail, "?");
+				$message = $wizard_config['message']."\n".$t_url."?verify=".$passcrypt;
+				$mailheaders = 'From: '.$wizard_config['from']. "\r\n" .
+				'X-Mailer: PHP/' . phpversion();
+				mail($mail_ver, $wizard_config['title'], $message, $mailheaders);
 			} else {
 				$post_keys = rtrim($post_keys,',');
 				$post_values = rtrim($post_values,',');
