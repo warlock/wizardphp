@@ -40,8 +40,6 @@ while (!$result->EOF) {
 	foreach ( $wizard_model as $type => $value_type) {
 		if(substr($type,0,1) != '_') {
 			if (is_array($value_type)) {
-			//print $type."es un array<br>";
-			//
 				foreach ($value_type as $key2 => $class2) {
 					switch ($key2) {
 						case "select":
@@ -67,7 +65,7 @@ while (!$result->EOF) {
 	}
 	// Update and Destroy buttons...
 	?>
-<th><form method="post" action="<? print $_go_update; ?>"><input type="hidden" name="update_form" value="<? print $wizard_model_name; ?>"><input type="hidden" name="id" value="<? print $result->fields["id"]; ?>"><input type="submit" value="<? trans($wizard_model_name,"_go_update"); ?>"></form></th>
+<th><form method="post" action="<? print $_go_update; ?>"><input type="hidden" name="action" value="read"><input type="hidden" name="id" value="<? print $result->fields["id"]; ?>"><input type="submit" value="<? trans($wizard_model_name,"_go_update"); ?>"></form></th>
 <th><form method="post" action="<? print $_go_destroy; ?>"><input type="hidden" name="action" value="destroy"><input type="hidden" name="form_id" value="<? print $wizard_model_name; ?>"><input type="hidden" name="id" value="<?print $result->fields["id"]; ?>"><input type="submit" value="<? trans($wizard_model_name,"_go_destroy"); ?>"></form></th>
 </tr>
 	<?

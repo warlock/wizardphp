@@ -20,6 +20,9 @@ if (count($_POST) > 1) {
 						$action = "create"; 
 						$postalt = "insert into ";
 						break;
+					case "read":
+						$show_id = 1;
+						break;
 					case "update":
 						$action = "update";
 						$postalt = "update ";
@@ -39,10 +42,6 @@ if (count($_POST) > 1) {
 						$db->Close();
 						break;
 				}
-				break;
-			case "update_form":
-				$post_model = $input_value;
-				$show_id = 1;
 				break;
 			case "form_id":
 				if(isset($postalt)) {
