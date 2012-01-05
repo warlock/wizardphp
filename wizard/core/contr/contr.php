@@ -9,9 +9,9 @@ while ($wizard_control_file = readdir($wizard_control_dir)) {
 			eval("function $wizard_control_file () {
 				include(\"wizard/core/contr/init.php\");
 				include(\"wizard/controller/$wizard_control_file/controller.php\");
-			}");
+			};");
 		} else {
-			print "<b>WizardPHP ERROR:</b> \"".$wizard_control_file_r."\" no contains \"controller.php\" file.<br>" ;
+			wizard_error("Controller <b>".$wizard_control_file_."</b> no contains \"controller.php\" file.<br>");
 		}
 	}
    }

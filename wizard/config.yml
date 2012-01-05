@@ -1,5 +1,6 @@
 # MODES: development(Automatically creates tables), production
 mode : development
+debug : off
 # DEFAULT LANGUAGE
 language : en
 # DATABASE CONFIG

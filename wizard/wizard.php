@@ -3,7 +3,6 @@
 	WizardPHP Framework
 	Josep Subils Rigau - mail: jsubils@iberonline.com
 	http://www.wizardphp.com
-	http://github.com/broadcast/bunsu
 */
 include('core/tools/tools.php'); // Basic tools.
 include('core/config/config.php'); // Configuration loader.

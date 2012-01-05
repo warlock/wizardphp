@@ -60,10 +60,10 @@ if ($wizard_config['mode'] == "development") {
 				}
 			}
 			// TABLE EXISTS END
-		} else { 
+		} else {
 			// TABLE NO EXISTS
 			$query_data ="";
-			$query = "CREATE TABLE IF NOT EXISTS ".$table_name." ( id INT, ";
+			$query = "CREATE TABLE IF NOT EXISTS ".$table_name." ( id INT NOT NULL AUTO_INCREMENT, ";
 			foreach ($wizard_model_complete[$table_name] as $key => $value) {
 				if(substr($key,0,1) != '_') {
 					switch ($value) {
@@ -85,7 +85,7 @@ if ($wizard_config['mode'] == "development") {
 				}
 			}
 			$query_data = rtrim($query_data,', ');
-			$query = $query.$query_data." );";
+			$query = $query.$query_data.", PRIMARY KEY (id) );";
 			// FOR EXECUTE CREATE TABLES
 			$db->Execute($query);				
 		} // TABLE NO EXISTS END

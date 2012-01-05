@@ -6,11 +6,17 @@ if(isset($wizard_model['_go_to'])) { // URL that goes after "submit"
 } else {
 	?><form method="post" action="?"><?
 }
-if (func_num_args() > 1) {
-	$id_update = $wizard_args['1']; // Load the "id" of the row you want to modify.
+// Identify form controller
+if ($wizard_num_args == 2) {
+	$go_post_cont = $wizard_args[1];
+}
+// Identify update post_id
+global $post_id;
+if (isset($post_id)) {
+	$id_update = $post_id;
 } else {
 	$id_update = 0;
-}
+} 
 if ($id_update > 0) {
 	$db = &ADONewConnection($wizard_config['class']);
 	$db->PConnect($wizard_config['host'],$wizard_config['user'],$wizard_config['password'],$wizard_config['database']);
@@ -20,7 +26,12 @@ if ($id_update > 0) {
 	?><input type="hidden" name="action" value="update"><?
 	?><input type="hidden" name="id" value="<? print $id_update; ?>"><?
 } else {
-	?><input type="hidden" name="action" value="create"><?
+	if (isset($go_post_cont)) { // Identify when post isn't CRUD
+		?><input type="hidden" name="action" value="controller"><?
+		?><input type="hidden" name="postcontroller" value="<? print $go_post_cont; ?>"><?
+	} else { // Post is CRUD
+		?><input type="hidden" name="action" value="create"><?
+	}
 }
 ?><input type="hidden" name="form_id" value="<? print $wizard_model_name; ?>"><?
 // Check the model and prints the results.

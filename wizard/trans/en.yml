@@ -2,29 +2,33 @@
 users:
   mail : Email
   name : Name
-  level : Level
+  surname : Surname
+  nif : NIF
+  telf : Telephone
+  address : Address
+  city : City
+  zip : Zip
+  country : Country
   password : Password
   login : Login
   submit : Register user
   reset : Reset form
   _go_update : Edit user
   _go_destroy : Delete user
-feeds:
-  name : Name
-  aka : Aka
-  favico : Favico
-  category : Category
-  country : Country
-  language : Language
-  format : Format
-  htmlurl : Html_Url
-  xmlurl : Xml_Url
-  submit: Send
-  reset: Reset form
-  free : Free
-  partner : Partner
-  _go_update : Edit
-  _go_destroy : Delete
-extras:
-  crear : Create a new feed
-  llista : Go to list
+  logout : Logout
+  logged_with : Logged with
+  user_noexist : User does not exist!
+  notmember : You still not a member
+  notmember2 : Sing up now!
+  verified : User verified
+index:
+  info : More information
+  empieza : Start service!
+tx:
+  identify : Please identify
+new:
+  return : Back to previous page
+  filldata: Fill in the details to sign up
+  identified : Already identified as
+confirma:
+  verifica : Please read your email. We have sent you a check. Click the URL we sent you to validate your account.

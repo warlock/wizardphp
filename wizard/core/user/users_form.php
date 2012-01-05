@@ -14,10 +14,10 @@ function users_form() {
 				$dbs = $db->Execute($select_login);
 				if (!$dbs->EOF) {
 					$query_verify = "update users set activ = '1', expiration = '0'  where id = '".$dbs->fields[id]."'";
-					print "<b>User</b> ".$dbs->fields[mail]." <b>verified!</b><br>";
+					print "<b>".trans('users','verified').":</b> ".$dbs->fields[mail]."<br>";
 					$db->Execute($query_verify);
 				} else {
-					print "<b>User does not exist!</b><br>";
+					print "<b>".trans('users','user_noexist')."</b><br>";
 				}
 				$db->Close();
 				//
@@ -41,17 +41,17 @@ function users_form() {
 					<input type="hidden" name="form_id" value="users">
 					</form>
 					<?
-					print "Logged with: ".$userlogs->fields[mail];
-					?> | <a href="#" onclick="logoutform.submit()">Logout</a><br><?
+					print trans('users','logged_with')." ".$userlogs->fields[mail];
+					?> <b><a href="#" onclick="logoutform.submit()"><? trans('users','logout'); ?></a></b><br><?
 				} else {
 					// Have cookie but no logged
 					?>
 					<form method="post" action="<? print $go_to; ?>"> 
 					<input type="hidden" name="action" value="login">
 					<input type="hidden" name="form_id" value="users">
-					<? trans("users","mail"); ?> <input type="text" name="mail" />   
-					<? trans("users","password"); ?> <input type="text" name="password" /> 
-					<input type="submit" name="<? trans("users","login"); ?>" /> 
+					<? trans("users","mail"); ?> <input type="text" name="mail" />   <br>
+					<? trans("users","password"); ?> <input type="password" name="password" /> <br>
+					<input type="submit" value="<? trans("users","login"); ?>" /> 
 					</form> 
 					<?
 				}
@@ -61,9 +61,9 @@ function users_form() {
 			<form method="post" action="<? print $go_to; ?>"> 
 			<input type="hidden" name="action" value="login">
 			<input type="hidden" name="form_id" value="users">
-			<? trans("users","mail"); ?><input type="text" name="mail" />   
-			<? trans("users","password"); ?><input type="text" name="password" /> 
-			<input type="submit" name="<? trans("users","login"); ?>" /> 
+			<? trans("users","mail"); ?><input type="text" name="mail" /> <br>  
+			<? trans("users","password"); ?><input type="password" name="password" /> <br>
+			<input type="submit" value="<? trans("users","login"); ?>" /> 
 			</form> 
 			<?
 		}
