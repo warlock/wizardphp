@@ -1,0 +1,18 @@
+# MODEL CONFIGURATION
+users:
+  mail : string
+  password : password
+  name : string
+  surname : string
+  nif : string
+  telf : string
+  address : string
+  city : string
+  country : string
+  zip : string
+  level : 1
+  _button : [submit, reset]
+sessions:
+  userid : string
+  cookie : string
+  time : string

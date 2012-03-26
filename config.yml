@@ -1,0 +1,15 @@
+# MODES: development(Automatically creates tables), production
+mode : development
+debug : off
+# DEFAULT LANGUAGE
+language : en
+# DATABASE
+class : mysql
+host  : localhost
+user  : user
+password : password
+database : database
+# USER MANAGER: Verification mail
+from  : wizard@wizard.com
+title : 'Mail de verificacion'
+message: 'Necesitas verificar tu mail para que tu cuenta este activa. Para verificar que es tu mail haz clic en la siguiente url:'
