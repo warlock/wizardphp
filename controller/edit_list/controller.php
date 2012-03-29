@@ -1,13 +1,9 @@
 <?
-// WizardPHP : Show List controller...
+// WizardPHP : Edit List controller...
 $keys = '';
 $makecolumns = '';
 $destroylock = 0;
 $updatelock = 0;
-if ($wizard_num_args == 2) {
-	$from_seg = $wizard_args[1]; // If 2nd arg is 1, show view
-}
-
 ?>
 <TABLE BORDER="1"> 
 <TR> <?
@@ -25,10 +21,10 @@ foreach ($wizard_model as $type => $value_type) {
 			$destroylock = 1;
 		} else {
 			if ($updatelock == 0) {
-				$_go_update = "?";
+				$_go_update = "";
 			}
 			if ($destroylock == 0) {
-				$_go_destroy = "?";
+				$_go_destroy = "";
 			}
 		}
 	}
@@ -67,9 +63,12 @@ while (!$result->EOF) {
         	}
 		}
 	}
-	if ($from_seg == 1) {
-		?><th><a href="show/<? print $result->fields["id"]; ?>"><? t($wizard_model_name,'view'); ?></a></th><?
-	}
+	// Update and Destroy buttons...
+	?>
+<th><form method="post" action="<? /* print $_go_update; */ print 'edit/'.$result->fields["id"]; ?>"><input type="hidden" name="action" value="read"><input type="hidden" name="id" value="<? print $result->fields["id"]; ?>"><input type="submit" value="<? t($wizard_model_name,"_go_update"); ?>"></form></th>
+<th><form method="post" action="<? print $_go_destroy; ?>"><input type="hidden" name="action" value="destroy"><input type="hidden" name="form_id" value="<? print $wizard_model_name; ?>"><input type="hidden" name="id" value="<?print $result->fields["id"]; ?>"><input type="submit" value="<? t($wizard_model_name,"_go_destroy"); ?>"></form></th>
+</tr>
+	<?
 	$result->MoveNext();
 }
 $db->Close();

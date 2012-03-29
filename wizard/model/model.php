@@ -16,5 +16,8 @@ while ($wizard_model_file = readdir($wizard_model_dir)) {
 		}
 	}
 }
-closedir($wizard_model_dir); 
+closedir($wizard_model_dir);
+foreach ($wizard_model_complete as $wzd_name_model => $wzd_value_in_model) {
+	$wzd_model_names[] = $wzd_name_model;
+}
 ?>

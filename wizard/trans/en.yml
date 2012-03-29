@@ -21,6 +21,7 @@ users:
   notmember : You still not a member
   notmember2 : Sing up now!
   verified : User verified
+  create_new : Create new
 index:
   info : More information
   empieza : Start service!
@@ -32,3 +33,5 @@ new:
   identified : Already identified as
 confirma:
   verifica : Please read your email. We have sent you a check. Click the URL we sent you to validate your account.
+default:
+  default: DEFAULT

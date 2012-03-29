@@ -4,19 +4,28 @@
 if(isset($wizard_model['_go_to'])) { // URL that goes after "submit"
 	?><form method="post" action="<? print $wizard_model['_go_to']; ?>"><?
 } else {
-	?><form method="post" action="?"><?
+	global $wzd_from_seg;
+	if ($wzd_from_seg == "edit_url") {
+		?><form method="post" action="../edit"><?
+	} elseif ($wzd_from_seg == "new_url") {
+		?><form method="post" action="edit"><?
+	} else {
+		?><form method="post" action=""><?
+	}
 }
-// Identify form controller
-if ($wizard_num_args == 2) {
-	$go_post_cont = $wizard_args[1];
-}
+
 // Identify update post_id
-global $post_id;
+if ($wizard_num_args == 2) {
+	$post_id = $wizard_args[1];
+	} else {
+	global $post_id;
+}
 if (isset($post_id)) {
 	$id_update = $post_id;
 } else {
 	$id_update = 0;
 } 
+
 if ($id_update > 0) {
 	$db = &ADONewConnection($wizard_config['class']);
 	$db->PConnect($wizard_config['host'],$wizard_config['user'],$wizard_config['password'],$wizard_config['database']);
@@ -26,9 +35,9 @@ if ($id_update > 0) {
 	?><input type="hidden" name="action" value="update"><?
 	?><input type="hidden" name="id" value="<? print $id_update; ?>"><?
 } else {
-	if (isset($go_post_cont)) { // Identify when post isn't CRUD
+	if ($wizard_model['_controller'] != "") { // Identify when post isn't CRUD
 		?><input type="hidden" name="action" value="controller"><?
-		?><input type="hidden" name="postcontroller" value="<? print $go_post_cont; ?>"><?
+		?><input type="hidden" name="postcontroller" value="<? print $wizard_model['_controller']; ?>"><?
 	} else { // Post is CRUD
 		?><input type="hidden" name="action" value="create"><?
 	}
@@ -38,6 +47,8 @@ if ($id_update > 0) {
 	foreach ($wizard_model as $key => $class) {
 		switch ($key) {
 			case "_go_to":
+				break;
+			case "_controller":
 				break;
 			case "_button":
 					if (is_array($class)) {
@@ -125,17 +136,12 @@ if ($id_update > 0) {
 										print $query."<br>";
 										break;
 								}
-								
 							}
 						} else {
 							// It ensures that there is some direction after removing the row.
 							if ($key == "_go_destroy") {
                         		$_go_destroy = $class;
                             	$destroylock = 1;
-                        	} else {
-                        		if ($destroylock == 0) {
-                            		$_go_destroy = "?";
-                            	}
                             }
                 		}
 				}
@@ -143,6 +149,15 @@ if ($id_update > 0) {
 	}
 ?></form><?
 // Button to delete the row when editing.
+
 if ($id_update>0) {
+	if ($destroylock != 1) {
+		//global $wzd_from_seg;
+		if ($wzd_from_seg == "edit_url") {
+			$_go_destroy = "../edit";
+		} else {
+			$_go_destroy = "";
+		}
+	}
 	?><form method="post" action="<? print $_go_destroy; ?>"><input type="hidden" name="action" value="destroy"><input type="hidden" name="form_id" value="<? print $wizard_model_name; ?>"><input type="hidden" name="id" value="<? if ($id_update > 0) { print $value['id']; } ?>"><input type="submit" value="<? t($wizard_model_name,"_go_destroy"); ?>"></form></th>
 <? } ?>
