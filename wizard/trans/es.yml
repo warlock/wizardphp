@@ -35,3 +35,14 @@ confirma:
   verifica : Porfavor, consulta tu correo electr&oacute;nico. Se ha enviado una verificaci&oacute;n. Haz click en la url para confirmar que dispones de un correo electr&oacute;nico valido.
 default:
   default : Por defecto
+  
+animals:
+  create_new : Crear nuevo
+  edit_list : Volver a la lista
+  nombre: Nombre
+  fecha: Fecha
+  descripcion: Descripcion
+  raza: Raza
+  _go_update : Editar
+  _go_destroy : Eliminar
+  submit: ENVIAR!

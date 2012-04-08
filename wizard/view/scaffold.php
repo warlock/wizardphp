@@ -33,7 +33,7 @@ if ($wizard_config['mode'] == "development") {
 				print $wzd_segmento[$wzd_model_seg].">".$wzd_segmento[$wzd_model_next];
 		}
 	} else {
-		show_list($wzd_segmento[$wzd_model_seg],'1');
+		show_list($wzd_segmento[$wzd_model_seg],'2');
 	}
 } else {
 	include('view/default.phtml');
