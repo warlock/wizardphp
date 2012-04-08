@@ -35,11 +35,3 @@ confirma:
   verifica : Please read your email. We have sent you a check. Click the URL we sent you to validate your account.
 default:
   default: DEFAULT
-animals:
-  create_new : Create new
-  edit_list : Go to list
-  nombre: Name
-  fecha: Date
-  descripcion: Description
-  raza: Raze
-  submit: SEND!

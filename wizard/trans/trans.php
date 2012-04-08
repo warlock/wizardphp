@@ -7,7 +7,7 @@ $numargs = func_num_args();
 			$model = func_get_arg(0);
 			$key = func_get_arg(1);
 			global $language;
-			$trans = Spyc::YAMLLoad('wizard/trans/'.$language.'.yml');
+			$trans = Spyc::YAMLLoad('translate/'.$language.'.yml');
 			if ($trans[$model][$key] == "") {
 				print $key;
 			} else {
@@ -18,7 +18,7 @@ $numargs = func_num_args();
 			$model = func_get_arg(0);
 			$key = func_get_arg(1);
 			$lang = func_get_arg(2);
-			$trans = Spyc::YAMLLoad('wizard/trans/'.$lang.'.yml');
+			$trans = Spyc::YAMLLoad('translate/'.$lang.'.yml');
 			if ($trans[$model][$key] == "") {
 				print $key;
 			} else {
