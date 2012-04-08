@@ -41,34 +41,28 @@ $db->PConnect($wizard_config['host'],$wizard_config['user'],$wizard_config['pass
 $result = $db->Execute("SELECT id,".$finalcolumns." FROM ".$wizard_model_name);
 while (!$result->EOF) {
 	?><tr><?
-	foreach ( $wizard_model as $type => $value_type) {
+	foreach ($wizard_model as $type => $value_type) {
+		// proves
 		if(substr($type,0,1) != '_') {
 			if (is_array($value_type)) {
-				foreach ($value_type as $key2 => $class2) {
-					switch ($key2) {
-						case "select":
-							$keys_select = $class2;
-							$actv = 1;
-							break;
-						case "model":
-							if ($actv == 1) {
-								$keys_model = $class2;
-								$actv = 2;
-							}
-					}
-					if ($actv == 2) {
-					$query_select = "select ".$keys_select." from ".$keys_model." where id = ".$result->fields[$type];
-					$result_select = $db->Execute($query_select);
-					?><TH><? print $result_select->fields[$keys_select]; ?></TH><?
-					}
+				//print "<td>".$value_type['model']." : ".$value_type['select']."</td>";
+				if ($result->fields[$type] > 0 ) {
+					$relational = $db->Execute("SELECT ".$value_type['select']." FROM ".$value_type['model']." where id = ".$result->fields[$type]);
+					$relat_2 = $relational->FetchRow(0);
+					$ty_mod2 = $value_type['select'];
+					print "<td>".$relat_2[$ty_mod2]."</td>";
+				} else {
+					print "<td></td>";
 				}
 			} else {
-        		?><TH><?  print $result->fields[$type]; ?></TH><?
-        	}
+				print "<td>".$result->fields[$type]."</td>";
+			}
 		}
 	}
 	if ($from_seg == 1) {
 		?><th><a href="show/<? print $result->fields["id"]; ?>"><? t($wizard_model_name,'view'); ?></a></th><?
+	} elseif ($from_seg = 2) {
+		?><th><a href="<? print $wizard_model_name; ?>/show/<? print $result->fields["id"]; ?>"><? t($wizard_model_name,'view'); ?></a></th></tr><?
 	}
 	$result->MoveNext();
 }
