@@ -11,7 +11,6 @@ if ($wzd_segmento[0] != "" ) { //CON SEGMENTOS
 	$wzd_may_lang_file = "translate/".$wzd_segmento[0].".yml";
 	if (file_exists($wzd_may_lang_file)) {
 		//CON IDIOMA!
-		print "ESTA!!";
 		$language = $wzd_segmento[0];
 		if($wzd_segmento[1] != "") {	// SEGMENTO CONTIGUO NO VACIO
 			$wzd_file = 'view/'.$wzd_segmento[1].'.phtml';
