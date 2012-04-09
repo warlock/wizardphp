@@ -7,9 +7,6 @@ table id
 table key value
 delete table id
 delete table key value
-many table1 table2 id
-update table key value key value key value...
-insert table keys(explode) value value value
 
 */
 function db() {
@@ -19,12 +16,29 @@ function db() {
 		$db->PConnect($wizard_config['host'],$wizard_config['user'],$wizard_config['password'],$wizard_config['database']);
 		switch ($wizard_num_args) {
 			case "1": // table
-				$table = $wizard_args[0];
-				$query = "SELECT * FROM ".$table;
-				$result = $db->Execute($query);
-				while ($array = $result->FetchRow()) {
-					$return[] = $array;
+				global $wzd_model_names;
+				if (in_array($wizard_args[0], $wzd_model_names)) { // Arg is a model
+					$table = $wizard_args[0];
+					$query = "SELECT * FROM ".$table;
+					$result = $db->Execute($query);
+					while ($array = $result->FetchRow()) {
+						$return[] = $array;
+					}
+				} else { // Normal SQL Query
+					$query = $wizard_args[0];
+					$q_exp = explode(" ",$query);
+					$first = strtolower($q_exp[0]);
+					if ($first == "select") { // SQL QUERY WITH SELECT
+						$result = $db->Execute($query);
+						while ($array = $result->FetchRow()) {
+							$return[] = $array;
+						}
+					} else { // RANDOM SQL QUERY
+						$db->Execute($query);
+						$return = TRUE;
+					}
 				}
+
 				break;
 			case "2": //table id
 				$table = $wizard_args[0];
@@ -73,9 +87,9 @@ function db() {
 				}
 				break;
 			default:
-				$query = "Esto es un insert, update o select complejo";		
+				wizard_error('BAD Parameters');	
 		}
-		//RESOLUCIONES
+		//RESULTS
 		if(isset($return)) {
 			return $return;
 		} else {
