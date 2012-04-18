@@ -33,7 +33,7 @@ foreach ($wizard_model as $type => $value_type) {
 		}
 	}
 }
-?></TR><?
+?><th></th></TR><?
 // Print the content...
 $finalcolumns = rtrim($makecolumns,",");
 $results = db("SELECT id,".$finalcolumns." FROM ".$wizard_model_name);
@@ -56,10 +56,12 @@ foreach ($results as $result) {
 			}
 		}
 	}
-	if ($from_seg == 1) {
-		?><th><a href="show/<? print $result['id']; ?>"><? t($wizard_model_name,'view'); ?></a></th><?
-	} elseif ($from_seg = 2) {
-		?><th><a href="<? print $wizard_model_name; ?>/show/<? print $result['id']; ?>"><? t($wizard_model_name,'view'); ?></a></th></tr><?
+	if ($from_seg == '1') {
+		?><td><a href="show/<? print $result['id']; ?>"><? t($wizard_model_name,'view'); ?></a></td><?
+	} elseif ($from_seg == '2') {
+		?><td><a href="<? print $wizard_model_name; ?>/show/<? print $result['id']; ?>"><? t($wizard_model_name,'view'); ?></a></td></tr><?
+	} elseif ($from_seg == '3') {
+		?><td><a href="<? print $wizard_model_name; ?>/show/<? print $result['id']; ?>"><? t($wizard_model_name,'view'); ?></a></td></tr><?
 	}
 }
 ?>

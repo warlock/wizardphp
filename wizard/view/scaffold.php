@@ -60,7 +60,7 @@
 	} else {
 		if(user('level') >= $wizard_model_complete[$wzd_segmento[$wzd_model_seg]]['_show'] or $wizard_config['mode'] == "development") {
 			include('view/theme/top.phtml');
-			show_list($wzd_segmento[$wzd_model_seg],'2');
+				show_list($wzd_segmento[$wzd_model_seg],'2');
 			include('view/theme/bottom.phtml');
 		} else {
 			include('view/default.phtml');
