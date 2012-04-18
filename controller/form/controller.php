@@ -26,12 +26,9 @@ if (isset($post_id)) {
 	$id_update = 0;
 } 
 
-if ($id_update > 0) {
-	$db = &ADONewConnection($wizard_config['class']);
-	$db->PConnect($wizard_config['host'],$wizard_config['user'],$wizard_config['password'],$wizard_config['database']);
-	$result = $db->Execute("select * from ".$wizard_model_name." where id = ".$id_update);
-	$value = $result->FetchRow(0);
-	$db->Close();
+if ($id_update > 0) {  // Show value in form
+	$values = db($wizard_model_name,$id_update);
+	$value = $values[0];
 	?><input type="hidden" name="action" value="update"><?
 	?><input type="hidden" name="id" value="<? print $id_update; ?>"><?
 } else {
@@ -105,36 +102,29 @@ if ($id_update > 0) {
 							foreach ($class as $key2 => $class2) {
 								switch ($key2) {
 									case "select":
-										$keys = $class2;
-										$query = "select id,".$keys." from ".$class[model];
-										$db = &ADONewConnection($wizard_config['class']);
-										$db->PConnect($wizard_config['host'],$wizard_config['user'],$wizard_config['password'],$wizard_config['database']);
-										$result = $db->Execute($query);
-										t($wizard_model_name,$key);  ?>
-										<SELECT NAME="<? print $key; ?>" SIZE="1">
-											<?
-											while (!$result->EOF) {
-											?> 
-											<OPTION VALUE="<?  print $result->fields[id]; ?>" <? 
+										$results = db($class[model]);
+										t($wizard_model_name,$key);
+										?> <SELECT NAME="<? print $key; ?>" SIZE="1"><?
+											foreach ($results as $result) {
+											?><OPTION VALUE="<?  print $result['id']; ?>" <? 
 											 if ($id_update > 0) {
-												if ($result->fields[id] == $value[$key]) {
+												if ($result['id'] == $value[$key]) {
 													print "SELECTED";
-												} 
+												}
 											 }
-											 ?> > <?  print $result->fields[$keys]; ?></OPTION>
-											<?
-											$result->MoveNext();
+											 ?> > <?  print $result[$class2]; ?></OPTION><?
 											}
-											$db->Close();
 											?>
 										</SELECT><br>
 										<?
 										break;
 									case "count":
+									/*
 										$table = $class2;
 										$query = "select count(*) from ".$table;
 										print $query."<br>";
 										break;
+										*/
 								}
 							}
 						} else {

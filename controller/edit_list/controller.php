@@ -32,36 +32,32 @@ foreach ($wizard_model as $type => $value_type) {
 ?></TR><?
 // Print the content...
 $finalcolumns = rtrim($makecolumns,",");
-$db = &ADONewConnection($wizard_config['class']);
-$db->PConnect($wizard_config['host'],$wizard_config['user'],$wizard_config['password'],$wizard_config['database']);
-$result = $db->Execute("SELECT id,".$finalcolumns." FROM ".$wizard_model_name);
-while (!$result->EOF) {
+$results = db("SELECT id,".$finalcolumns." FROM ".$wizard_model_name); 
+foreach ( $results as $result ) {
 	?><tr><?
 	foreach ($wizard_model as $type => $value_type) {
 		if(substr($type,0,1) != '_') {
 			if (is_array($value_type)) {
 				//print "<td>".$value_type['model']." : ".$value_type['select']."</td>";
-				if ($result->fields[$type] > 0 ) {
-					$relational = $db->Execute("SELECT ".$value_type['select']." FROM ".$value_type['model']." where id = ".$result->fields[$type]);
-					$relat_2 = $relational->FetchRow(0);
+				if ($result[$type] > 0 ) {
+					$relat_1 = db("SELECT ".$value_type['select']." FROM ".$value_type['model']." where id = ".$result[$type]);
+					$relat_2 = $relat_1[0];
 					$ty_mod2 = $value_type['select'];
 					print "<td>".$relat_2[$ty_mod2]."</td>";
 				} else {
 					print "<td></td>";
 				}
 			} else {
-				print "<td>".$result->fields[$type]."</td>";
+				print "<td>".$result[$type]."</td>";
 			}
 		}
 	}
 	// Update and Destroy buttons...
 	?>
-<th><form method="post" action="<? /* print $_go_update; */ print 'edit/'.$result->fields["id"]; ?>"><input type="hidden" name="action" value="read"><input type="hidden" name="id" value="<? print $result->fields["id"]; ?>"><input type="submit" value="<? t($wizard_model_name,"_go_update"); ?>"></form></th>
+<th><form method="post" action="<? /* print $_go_update; */ print 'edit/'.$result["id"]; ?>"><input type="hidden" name="action" value="read"><input type="hidden" name="id" value="<? print $result["id"]; ?>"><input type="submit" value="<? t($wizard_model_name,"_go_update"); ?>"></form></th>
 <th><form method="post" action="<? print $_go_destroy; ?>"><input type="hidden" name="action" value="destroy"><input type="hidden" name="form_id" value="<? print $wizard_model_name; ?>"><input type="hidden" name="id" value="<?print $result->fields["id"]; ?>"><input type="submit" value="<? t($wizard_model_name,"_go_destroy"); ?>"></form></th>
 </tr>
 	<?
-	$result->MoveNext();
 }
-$db->Close();
 ?>
 </TABLE>
