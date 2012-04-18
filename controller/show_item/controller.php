@@ -13,7 +13,7 @@ if (isset($post_id)) {
 	$values = db($wizard_model_name, $post_id);
 	$value = $values[0];
 	foreach ($wizard_model as $key => $class) {
-		if($key != "_button" and $key != "_go_to") {
+		if(substr($key,0,1) != '_') {
 		//NO ES
 			if (is_array($class)) {
 				if ($value[$key] > 0 ) {
