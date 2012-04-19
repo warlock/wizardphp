@@ -4,6 +4,9 @@
 $wzd_url = $_SERVER[ "PHP_SELF"];
 $wzd_segmentos = explode("index.php/",$wzd_url);
 $wzd_segmento = split('/',$wzd_segmentos[1]);
+if (substr($wzd_url,-1) == "/") {
+	$wzd_end_url = TRUE;
+}
 
 
 

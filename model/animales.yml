@@ -1,0 +1,10 @@
+animals:
+  _show:1
+  _create:1
+  _edit:1
+  nombre:string
+  descripcion:text
+  raza:string
+  puta:string
+  propietario : { select : name, model : users }
+  _button:submit

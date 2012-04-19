@@ -14,7 +14,11 @@
 						if(user('level') >= $wizard_model_complete[$wzd_segmento[$wzd_model_seg]]['_create'] or $wizard_config['mode'] == "development") {
 						?><a href="new"><? t($wzd_segmento[$wzd_model_seg],'create_new'); ?></a><br><?
 						}
-						edit_list($wzd_segmento[$wzd_model_seg]);
+						if ($wzd_end_url) {
+							edit_list($wzd_segmento[$wzd_model_seg],1);
+						} else {
+							edit_list($wzd_segmento[$wzd_model_seg]);
+						}
 					}
 					include('view/theme/bottom.phtml');
 				} else {
@@ -29,7 +33,11 @@
 						?><a href="../show"><? t($wzd_segmento[$wzd_model_seg],'show_list'); ?></a><br><?
 						show_item($wzd_segmento[$wzd_model_seg],$wzd_segmento[$wzd_model_tres]);
 					} else {
-						show_list($wzd_segmento[$wzd_model_seg],'1');
+						if ($wzd_end_url) {
+							show_list($wzd_segmento[$wzd_model_seg],1);
+						} else {
+							show_list($wzd_segmento[$wzd_model_seg],2);
+						}
 					}
 					include('view/theme/bottom.phtml');
 				} else {
@@ -60,7 +68,11 @@
 	} else {
 		if(user('level') >= $wizard_model_complete[$wzd_segmento[$wzd_model_seg]]['_show'] or $wizard_config['mode'] == "development") {
 			include('view/theme/top.phtml');
-				show_list($wzd_segmento[$wzd_model_seg],'2');
+			if ($wzd_end_url) {
+				show_list($wzd_segmento[$wzd_model_seg],2);
+			} else {
+				show_list($wzd_segmento[$wzd_model_seg],3);
+			}
 			include('view/theme/bottom.phtml');
 		} else {
 			include('view/default.phtml');
