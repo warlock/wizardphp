@@ -1,8 +1,45 @@
 <html>
 	<head>
 		<title>wizard testig</title>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js">
+		</script>
+		
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$("a").click(function(){
+				alert("Adios!");
+			});
+		});
+		</script>
 	</head>
 	<body>
-		Testing <a href="http://www.wizardphp.com">wizard</a> :)
+		Hola bienvenidos amigos!<br>
+		<a href="http://www.wizardphp.com">haz click aqui!</a><br>
+		Testing:<br>
+		<? 
+		/*
+		table
+table id
+table key value
+delete table id
+
+delete table key value
+many table1 table2 id
+
+update table key value key value key value...
+insert table keys(explode) value value value
+*/
+$animals = db('animals');
+foreach ($animals as $animal) {
+	print $animal['nombre']."<br>";
+}
+
+users_form('new');
+
+users_form();
+
+user('level');
+//rss('http://estaticos.elmundo.es/elmundo/rss/espana.xml');
+		?>
 	</body>
 </html>

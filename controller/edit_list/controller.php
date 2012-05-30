@@ -5,10 +5,10 @@ $makecolumns = '';
 $destroylock = 0;
 $updatelock = 0;
 if ($wizard_num_args == 2) {
-	$from_seg = $wizard_args[1]; // If 2nd arg is 1, show view
+	//$from_seg = $wizard_args[1]; // If 2nd arg is 1, show view
 }
 ?>
-<TABLE BORDER="1"> 
+<TABLE> 
 <TR> <?
 // List of models with their corresponding translations.
 foreach ($wizard_model as $type => $value_type) {
@@ -56,15 +56,12 @@ foreach ( $results as $result ) {
 		}
 	}
 	// Update and Destroy buttons...
-	if ($from_seg == '1') {
-		// Edit button from URL /
+	if ($wzd_url_mod == '1') {  // Edit button from URL
 		?><td><form method="post" action="<? /* print $_go_update; */ print $result["id"]; ?>"><input type="hidden" name="action" value="read"><input type="hidden" name="id" value="<? print $result["id"]; ?>"><input type="submit" value="<? t($wizard_model_name,"_go_update"); ?>"></form></td><?
-	} else {
-		// Edit button from URL !/
+	} else { // Edit button from URL !
 		?><td><form method="post" action="<? /* print $_go_update; */ print 'edit/'.$result["id"]; ?>"><input type="hidden" name="action" value="read"><input type="hidden" name="id" value="<? print $result["id"]; ?>"><input type="submit" value="<? t($wizard_model_name,"_go_update"); ?>"></form></td><?
-	}
-	// Destroy button
-?><td><form method="post" action="<? print $_go_destroy; ?>"><input type="hidden" name="action" value="destroy"><input type="hidden" name="form_id" value="<? print $wizard_model_name; ?>"><input type="hidden" name="id" value="<? print $result["id"]; ?>"><input type="submit" value="<? t($wizard_model_name,"_go_destroy"); ?>"></form></td>
+	} // Destroy button
+	?><td><form method="post" action="<? print $_go_destroy; ?>"><input type="hidden" name="action" value="destroy"><input type="hidden" name="form_id" value="<? print $wizard_model_name; ?>"><input type="hidden" name="id" value="<? print $result["id"]; ?>"><input type="submit" value="<? t($wizard_model_name,"_go_destroy"); ?>"></form></td>
 </tr><?
 }
 ?>

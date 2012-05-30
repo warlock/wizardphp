@@ -1,0 +1,14 @@
+#BACKUP DEL QUE FUNCIONA A MITGES
+#RewriteEngine On
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteBase /
+#RewriteRule ^(.*)$ index.php/$1 [L]
+#RewriteRule ^models/(.*)$ /index.php?url=$1 [NC]
+
+Options +FollowSymlinks
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteBase /
+RewriteRule ^(.*)$ /index.php?wzd_url=$1 [NC]

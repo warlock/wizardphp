@@ -4,12 +4,12 @@ $keys = '';
 $makecolumns = '';
 $destroylock = 0;
 $updatelock = 0;
-if ($wizard_num_args == 2) {
-	$from_seg = $wizard_args[1]; // If 2nd arg is 1, show view
+if ($wizard_num_args >= 2) {
+	$columnas = $wizard_args[1];
+	$busqueda = $wizard_args[2];
 }
-
 ?>
-<TABLE BORDER="1"> 
+<TABLE> 
 <TR> <?
 // List of models with their corresponding translations.
 foreach ($wizard_model as $type => $value_type) {
@@ -33,13 +33,33 @@ foreach ($wizard_model as $type => $value_type) {
 		}
 	}
 }
-if (isset($from_seg)) {
+if ($wzd_url_mod != 0) { // URL Scaffold Modification
 ?><th></th><?
 }
 ?></TR><?
 // Print the content...
 $finalcolumns = rtrim($makecolumns,",");
-$results = db("SELECT id,".$finalcolumns." FROM ".$wizard_model_name);
+if (isset($busqueda)) {
+	$col_ex = explode(" ",$columnas);
+	$col_num = count($col_ex);
+	if ($col_num != 1) {
+		for ($i = 0; $i <= $col_num-1; $i++) {
+			if ($i == 0) {
+    			$col_query = $col_ex[$i]." LIKE '%".$busqueda."%' OR ";
+    		} elseif ($i == $col_num-1) {
+	    		$col_query = $col_query.$col_ex[$i]." LIKE '%".$busqueda."%'";
+	    	} else {
+	    		$col_query = $col_query.$col_ex[$i]." LIKE '%".$busqueda."%' OR ";
+	    	}
+	    }
+	} else {
+		$col_query = $col_ex[0]." LIKE '%".$busqueda."%'";
+	}
+	$db_query = "SELECT id,".$finalcolumns." FROM ".$wizard_model_name." WHERE ".$col_query;
+} else {
+	$db_query = "SELECT id,".$finalcolumns." FROM ".$wizard_model_name;
+}
+$results = db($db_query);
 foreach ($results as $result) {
 	?><tr><?
 	foreach ($wizard_model as $type => $value_type) {
@@ -59,11 +79,11 @@ foreach ($results as $result) {
 			}
 		}
 	}
-	if ($from_seg == '1') {
+	if ($wzd_url_mod == '1') { // URL Scaffold Modification
 		?><td><a href="<? print $result['id']; ?>"><? t($wizard_model_name,'view'); ?></a></td><?
-	} elseif ($from_seg == '2') {
+	} elseif ($wzd_url_mod == '2') {
 		?><td><a href="show/<? print $result['id']; ?>"><? t($wizard_model_name,'view'); ?></a></td><?
-	} elseif ($from_seg == '3') {
+	} elseif ($wzd_url_mod == '3') {
 		?><td><a href="<? print $wizard_model_name; ?>/show/<? print $result['id']; ?>"><? t($wizard_model_name,'view'); ?></a></td><?
 	} 
 	?></tr><?

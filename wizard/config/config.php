@@ -12,4 +12,6 @@ if(!isset($_COOKIE["sToken"]) or $_COOKIE[sToken] == "") {
 	setcookie("sToken",$tokenvalue,$tokentime);
 }
 
+$wzd_url_mod = 0; // URL Modification
+
 ?>

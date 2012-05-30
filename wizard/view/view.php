@@ -1,6 +1,7 @@
 <?
 // WizardPHP : View loader
 function start_wizard($wzd_url) {
+	global $wzd_url_mod;
 	global $wzd_model_names;
 	global $wizard_model_complete;
 	global $wizard_config;
@@ -46,7 +47,7 @@ function start_wizard($wzd_url) {
 	} else { // SIN SEGMENTOS
 		$wzd_file = 'view/index.phtml';
 		if (file_exists($wzd_file)) {
-			include ($wzd_file);
+			include($wzd_file);
 		} else {
 			include('view/default.phtml');
 		}

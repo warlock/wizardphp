@@ -15,13 +15,14 @@
 			<b>TESTING LEVELS:</b>
 			<? 
 			if (user()) {
-				print "Your level is <b>".user()."<br>";
+				print "Your level is <b>".user()."</b><br>";
 				print "Your mail is ".user('mail');
 			} else {
 				print "Please login.";
 			}
 			?>
 		</p><p>
+		<b>LIST USERS:</b>
 		<?
 		edit_list('users');
 		?>
