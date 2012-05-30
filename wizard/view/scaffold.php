@@ -47,7 +47,10 @@ if(isset($wzd_segmento[$wzd_seg_act[1]]) and $wzd_segmento[$wzd_seg_act[1]] != "
 			}
 			break;
 		case 'search':
-			if(user('level') >= $wizard_model_complete[$wzd_segmento[$wzd_model_seg]]['_show'] or $wizard_config['mode'] == "development") {
+			if(user('level') >= $wizard_model_complete[$wzd_segmento[$wzd_model_seg]]['_show'] or $wizard_config['mode'] == "development") {//Tiene level para ver
+					print "Modelo: ".$wzd_model_seg;
+			} else {
+				include("view/default.phtml");
 			}
 			break;
 		case 'new':
