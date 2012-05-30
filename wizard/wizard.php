@@ -13,4 +13,5 @@ include('trans/trans.php'); // Translation system.
 include('user/users.php'); // User management.
 include('contr/contr.php'); // Controlers loader.
 include('view/view.php'); // View loader.
+start_wizard($wzd_url);
 ?>

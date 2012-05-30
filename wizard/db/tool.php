@@ -93,7 +93,8 @@ function db() {
 		if(isset($return)) {
 			return $return;
 		} else {
-			print $query;
+				wizard_error('FALSE -> '. $query);
+				return FALSE;
 		}
 		$db->Close();
 	} else {
