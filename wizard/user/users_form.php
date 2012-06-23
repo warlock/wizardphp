@@ -6,7 +6,7 @@ function users_form() {
 	if ($num_args == "1")  {
 		$class = func_get_arg(0);
 		if ($class == "new") {
-			if (isset($_GET[verify])) {
+			if (isset($_GET["verify"])) {
 				//
 				$select_login = "select id, mail from users where pass_crypt = '".$_GET[verify]."' and activ = '0'";
 				$db = &ADONewConnection($wizard_config['class']);

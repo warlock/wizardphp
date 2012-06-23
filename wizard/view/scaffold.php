@@ -10,9 +10,11 @@ if(isset($wzd_segmento[$wzd_seg_act[1]]) and $wzd_segmento[$wzd_seg_act[1]] != "
 			if(user('level') >= $wizard_model_complete[$wzd_segmento[$wzd_model_seg]]['_edit'] or $wizard_config['mode'] == "development") {
 				theme("top");
 				if(isset($wzd_segmento[$wzd_seg_act[2]]) and $wzd_segmento[$wzd_seg_act[2]] != "") {
-					?><a href="../edit"><? t($wzd_segmento[$wzd_model_seg],'edit_list'); ?></a><br><?
-					$wzd_from_seg = "edit_url";
-					form($wzd_segmento[$wzd_model_seg],$wzd_segmento[$wzd_seg_act[2]]);
+					?>
+					<a href="../edit"><? t($wzd_segmento[$wzd_model_seg],'edit_list'); ?></a><br>
+					<?
+					//$wzd_from_seg = "edit_url";
+					form($wzd_segmento[$wzd_model_seg],$wzd_segmento[$wzd_seg_act[2]],"edit_url");
 				} else {
 					if(user('level') >= $wizard_model_complete[$wzd_segmento[$wzd_model_seg]]['_create'] or $wizard_config['mode'] == "development") {
 						?><a href="new"><? t($wzd_segmento[$wzd_model_seg],'create_new'); ?></a><br><?
@@ -79,7 +81,7 @@ if(isset($wzd_segmento[$wzd_seg_act[1]]) and $wzd_segmento[$wzd_seg_act[1]] != "
 				theme("top");
 				?><a href="edit"><? t($wzd_segmento[$wzd_model_seg],'edit_list'); ?></a><br><?
 				$wzd_from_seg = "new_url";
-				form($wzd_segmento[$wzd_model_seg]);
+				form($wzd_segmento[$wzd_model_seg],$wzd_from_seg);
 				theme("bottom");
 			} else {
 				include('view/default.phtml');

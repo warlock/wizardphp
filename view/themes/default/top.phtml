@@ -2,51 +2,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <style type="text/css">
-html,body {
-  font-family: Helvetica, Verdana, Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
+html, body, #container { height: 100%; margin: 0; padding: 0; }
+body > #container { height: auto; min-height: 100%; }
+#content { padding-bottom: 3em; }
+#footer { clear: both; position: relative; z-index: 10; height: 5em; margin-top: -3em; }
 
-#top-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 999;
-  width: 100%;
-  height: 23px;
-}
-
-* html #top-bar {
-  position: absolute;
-}
-
-#topbar-inner {
-  height: 23px;
-  background: #dddddd;
-}
-
-* html #topbar-inner {
-  margin-right: 17px;
-}
-
-* html body {
-  padding-top: 23px;
-}
-
-* html,* html body {
-  overflow-y: hidden;
-  height: 100%;
-  margin-top: -23px;
-}
-
-#mainouter {
-  position: relative;
-  z-index: 2;
-  padding-top: 25px;
-  padding-bottom: 40px;
-}
-
+body { font: .75em/normal "Lucida Sans", "Lucida Grande", sans-serif; }
+a, a:link, a:visited { color: #c6762f; text-decoration: underoline; }
+a:hover, a:focus {  }
+p { margin-bottom: 1em; }
+#about { padding: 50px; }
+#footer { background-color: black; color: white; font-size: 100%; text-align: left; line-height: 3em; }
 
 table
 {
@@ -76,17 +42,8 @@ table tbody tr:hover td
 	color: #339;
 	background: #d0dafd;
 }
-
-
-A:link {text-decoration: none; color: #039;}
-A:visited {text-decoration: none; color: #039;}
-A:active {text-decoration: none; color: #039;}
-A:hover {text-decoration: underline; color: red;}
-
 </style>
 </head>
 <body>
-<div id="top-bar"> 
-  <div id="topbar-inner">WizardPHP Framework </div>
-</div>
-<div id="mainouter">
+<div id="container">
+<div id="content">

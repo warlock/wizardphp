@@ -6,13 +6,14 @@ $input_value = "";
 $postsend = "";
 $post_values = "";
 $postalt = "";
+$post_keys = "";
 $post_alter = "";
 $post_model = "";
 $post_id = "";
 $show_id = 0;
 $wizard_post = $_POST;
 if (count($_POST) > 1) {
-	if ($_POST[action] == "controller") {
+	if ($_POST["action"] == "controller") {
 		$file_wizard_post_controller = "controller/".$wizard_post[postcontroller]."/post.php";
 		if (file_exists($file_wizard_post_controller)) {
 			include($file_wizard_post_controller);
@@ -109,16 +110,19 @@ if (count($_POST) > 1) {
 				break;
 			case "create":
 				if ($form_id == "users") {
+					$wzd_from = t("mail","from","return");
+					$wzd_title = t("mail","title","return");
+					$wzd_message = t("mail","message","return");
 					$default_level = $wizard_model_complete[users][level];
 					$expiration = time() + 604800;
 					$postsend = $postsend." (".$post_keys." pass_crypt, mail_crypt, level, activ, expiration) values (".$post_values." '".$passcrypt."', '".$mailcrypt."', '".$default_level."', '0', '".$expiration."')";
 					// Mail verification
 					$url_mail = $_SERVER['HTTP_REFERER'];
 					$t_url = rtrim($url_mail, "?");
-					$message = $wizard_config['message']."\n".$t_url."?verify=".$passcrypt;
-					$mailheaders = 'From: '.$wizard_config['from']. "\r\n" .
+					$message = $wzd_message."\n".$t_url."?verify=".$passcrypt;
+					$mailheaders = 'From: '.$wzd_from. "\r\n" .
 					'X-Mailer: PHP/' . phpversion();
-					mail($mail_ver, $wizard_config['title'], $message, $mailheaders);
+					mail($mail_ver, $wzd_title, $message, $mailheaders);
 				} else {
 					$post_keys = rtrim($post_keys,',');
 					$post_values = rtrim($post_values,',');

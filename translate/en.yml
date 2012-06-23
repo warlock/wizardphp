@@ -1,4 +1,10 @@
 # MODEL TRANSLATION: ENGLISH
+
+# USER MANAGER: Mail verification
+mail:
+  from : wizard@wizardphp.com
+  title : "Mail verification"
+  message : "Please click for mail verification:"
 users:
   mail : Email
   name : Name
@@ -22,9 +28,6 @@ users:
   notmember2 : Sing up now!
   verified : User verified
   create_new : Create new
-index:
-  info : More information
-  empieza : Start service!
 tx:
   identify : Please identify
 new:

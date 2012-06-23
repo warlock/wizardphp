@@ -1,7 +1,7 @@
 <?
 // WizardPHP : Model loader
 $wizard_model_dir = opendir("model");
-$wzd_f_m == 0;
+$wzd_f_m = 0;
 while ($wizard_model_file = readdir($wizard_model_dir)) {
 	$wizard_model_file_r="model/".$wizard_model_file;
 	if ($wizard_model_file !== "." and $wizard_model_file !== "..") {

@@ -1,0 +1,17 @@
+# MODES: development(Automatically creates tables), production
+mode : development
+debug : off
+# DEFAULT LANGUAGE
+language : en
+# DATABASE
+class : mysql
+host  : localhost
+user  : username
+password : password
+database : database
+# UPDATE/INSTALL REPOSITORY
+ftp_serv : ftpserver
+ftp_user : username
+ftp_pass : password
+filesdb : config/filesdb.yml
+cache : wizard/cache/
