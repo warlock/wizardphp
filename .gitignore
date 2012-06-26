@@ -1,4 +1,4 @@
-config/
-translate/
-view/
+config/*
+translate/*
+view/*
 .DS_Store
