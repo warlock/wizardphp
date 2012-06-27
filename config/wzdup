@@ -1,0 +1,14 @@
+#!/usr/bin/php
+<?php
+// THIS IS WZUP SHELL SOFTWARE
+if(defined('STDIN') ) {
+	include("../wizard/tools/tools.php");
+	if (isset($argv[1])) {
+		print "el argumento esta puesto";
+			wzdup($argv[1],$argv[2],$argv[3]);
+	} else {
+		wzdup();
+	}
+}
+?>
+

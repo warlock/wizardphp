@@ -1,4 +1,5 @@
-config/*
+config/config.yml
+config/filesdb.yml
 translate/*
 view/*
 .DS_Store
