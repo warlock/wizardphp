@@ -1,4 +1,4 @@
-<?
+<?php
 function strquick() {
         $numargs = func_num_args();
         if ( $numargs == 2 ) {

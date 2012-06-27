@@ -1,5 +1,9 @@
+<?php
+if(!defined('STDIN') ) {
+?>
 <!-- WizardPHP Framework http://www.wizardphp.com -->
-<?
+<?php
+}
 function set_cookie($Name, $Value = '', $MaxAge = 0, $Path = '', $Domain = '', $Secure = false, $HTTPOnly = false) {
   header('Set-Cookie: ' . rawurlencode($Name) . '=' . rawurlencode($Value)
                         . (empty($MaxAge) ? '' : '; Max-Age=' . $MaxAge)

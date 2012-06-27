@@ -1,4 +1,4 @@
-<?
+<?php
 function mkform() {
 	global $wizard_model_complete;
 	global $wizard_config;
@@ -38,28 +38,28 @@ function mkform() {
 		if ($wizard_model_name == "_open") {
 			if(isset($class)) {
 				?>
-				<form method="post" action="<? print $class; ?>">
-				<?			
+				<form method="post" action="<?php print $class; ?>">
+				<?php			
 			} else {
 				?>
 				<form method="post" action="">
-				<?
+				<?php
 			}
 		} elseif ($wizard_model_name == "_hidden") {
 			?>
-			<input type="hidden" name="<? print $class; ?>" value="<? print $key; ?>">
-			<?
+			<input type="hidden" name="<?php print $class; ?>" value="<?php print $key; ?>">
+			<?php
 		} elseif ($wizard_model_name == "_button") {
 			?>
-			<input type="<? print $key; ?>" value="<? t($class,$key); ?>">
-			<?
+			<input type="<?php print $key; ?>" value="<?php t($class,$key); ?>">
+			<?php
 		} else {
 			include('class.php');
 		}
 	} else {
 		?>
 		</form>
-		<?
+		<?php
 	}
 }
 ?>

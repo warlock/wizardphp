@@ -1,4 +1,4 @@
-<?
+<?php
 function captcha() {
 // This function is under construction!
 	$characters = "0123456789abcdefghijklmnopqrstuvwxyz";
