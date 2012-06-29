@@ -6,12 +6,12 @@ language : en
 # DATABASE
 class : mysql
 host  : localhost
-user  : username
-password : password
-database : database
+user  : root
+password : root
+database : wizard
 # UPDATE/INSTALL REPOSITORY
-ftp_serv : ftpserver
-ftp_user : username
-ftp_pass : password
+ftp_serv : ftp.wizardphp.org
+ftp_user : anonymous
+ftp_pass : wzd@wizardphp.org
 filesdb : config/filesdb.yml
 cache : wizard/cache/

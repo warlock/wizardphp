@@ -4,10 +4,25 @@
 if(defined('STDIN') ) {
 	include("../wizard/tools/tools.php");
 	if (isset($argv[1])) {
-		print "el argumento esta puesto";
-			wzdup($argv[1],$argv[2],$argv[3]);
+		if ($argv[1] == "help") {
+			print "HELP";
+		} else {
+			if (isset($argv[2])) {
+				if (isset($argv[3])) {
+					print "Argumento 3 disponible";
+					//wzdup($argv[1],$argv[2],$argv[3]);
+				} else {
+					print "Argumento 2 disponible";
+					//wzdup($argv[1],$argv[2]);
+				}
+			} else {
+				print "Argumento 1 disponible!";
+				//wzdup($argv[1]);
+			}
+		}
 	} else {
-		wzdup();
+		print "Sin argumentos";
+		//wzdup();
 	}
 }
 ?>

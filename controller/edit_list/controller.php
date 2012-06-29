@@ -57,7 +57,19 @@ foreach ( $results as $result ) {
 	}
 	// Update and Destroy buttons...
 	if ($wzd_url_mod == '1') {  // Edit button from URL
-		?><td><form method="post" action="<? /* print $_go_update; */ print $result["id"]; ?>"><input type="hidden" name="action" value="read"><input type="hidden" name="id" value="<? print $result["id"]; ?>"><input type="submit" value="<? t($wizard_model_name,"_go_update"); ?>"></form></td><?
+		mkform("_open",$result["id"]);
+		mkform("_hidden","action","read");
+		mkform("_hidden","id",$result["id"]);
+		mkform("_button",$wizard_model_name,"_go_update");
+		mkform();
+		/* ?><td><form method="post" action="<? print $result["id"]; ?>">
+		<input type="hidden" name="action" value="read">
+		<input type="hidden" name="id" value="<? print $result["id"]; ?>">
+		<input type="submit" value="<? t($wizard_model_name,"_go_update"); ?>"></form></td><? */
+		
+		
+		
+		
 	} else { // Edit button from URL !
 		?><td><form method="post" action="<? /* print $_go_update; */ print 'edit/'.$result["id"]; ?>"><input type="hidden" name="action" value="read"><input type="hidden" name="id" value="<? print $result["id"]; ?>"><input type="submit" value="<? t($wizard_model_name,"_go_update"); ?>"></form></td><?
 	} // Destroy button

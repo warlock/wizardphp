@@ -24,6 +24,7 @@ if ($wzdup_args >= 1) {
 						if (!$result) {
 							print "No he podido instalar el paquete!".$end;
 						} else {
+							unzip($data[name]);
 							print "Paquete instalado!".$end;
 						}
 					}

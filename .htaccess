@@ -12,3 +12,9 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteBase /
 RewriteRule ^(.*)$ /index.php?wzd_url=$1 [NC]
+
+
+#<IfModule mod_rewrite.c>
+#   RewriteEngine on
+#   RewriteRule ^([A-Za-z0-9_-]+)(/)?$ index.php?wzd_url=$1 [QSA]
+#</IfModule>

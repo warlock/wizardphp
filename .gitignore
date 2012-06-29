@@ -3,3 +3,5 @@ config/filesdb.yml
 translate/*
 view/*
 .DS_Store
+
+model/test.yml
