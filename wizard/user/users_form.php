@@ -1,4 +1,4 @@
-<?
+<?php
 function users_form() {
 	global $wizard_config;
 	$go_to = "?";

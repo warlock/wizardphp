@@ -1,4 +1,4 @@
-<?
+<?php
 // WizardPHP : Controller loader
 $wizard_control_dir = opendir("controller");
 while ($wizard_control_file = readdir($wizard_control_dir)) {

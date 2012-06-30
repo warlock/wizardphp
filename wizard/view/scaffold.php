@@ -1,4 +1,4 @@
-<?
+<?php
 $wzd_seg_act = array(
     "1" => $wzd_model_seg+1,
     "2" => $wzd_model_seg+2,

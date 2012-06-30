@@ -1,4 +1,4 @@
-<?
+<?php
 // WizardPHP : View loader
 function start_wizard() {
 	global $wzd_url;

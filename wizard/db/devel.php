@@ -1,4 +1,4 @@
-<?
+<?php
 // DEVELOPMENT MODE: AUTOCREATE TABLES
 if ($wizard_config['mode'] == "development") {
 	$db = &ADONewConnection($wizard_config['class']);

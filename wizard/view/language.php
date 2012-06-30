@@ -1,4 +1,4 @@
-<?
+<?php
 if(!isset($_COOKIE["sTlang"]) or $_COOKIE["sTlang"] == "") {
 	if (isset($wzd_lang)) {
 		$tokengen = mkpasswd().time();

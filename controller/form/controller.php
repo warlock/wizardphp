@@ -67,10 +67,10 @@ foreach ($wizard_model as $key => $class) {
 		case "_button":
 			if (is_array($class)) {
 				foreach ($class as $key2 => $class2) {
-					mkform("_button",$wizard_model_name,$class2);
+					mkform("_button",$class2,$wizard_model_name,$class2);
 				}
 			} else {
-				mkform("_button",$wizard_model_name,$class);
+				mkform("_button","submit",$wizard_model_name,$class);
 			}
 			break;
 		case "level":
@@ -85,26 +85,25 @@ foreach ($wizard_model as $key => $class) {
 	}
 }
 mkform();
+
 // Button to delete the row when editing.
 if ($id_update>0) {
-	if (isset($destroylock)) {
-		if ($destroylock != 1) {
-			if ($wzd_from_seg == "edit_url") {
-				$_go_destroy = "../edit";
-			} else {
-				$_go_destroy = "";
-			}
-		}
+	if(isset($wizard_model['_go_destroy'])) {
+		mkform("_open", $wizard_model["_go_destroy"]);
 	} else {
-		$_go_destroy = "";
+		print "No hi ha _go_destroy";
+		if ($wzd_from_seg == "edit_url") {
+			mkform("_open","../edit");
+		} elseif ($wzd_from_seg == "new_url") {
+			mkform("_open","edit");
+		} else {
+			mkform("_open");
+		}
 	}
-	mkform("_open",$_go_destroy);
 	mkform("_hidden","action","destroy");
 	mkform("_hidden","form_id",$wizard_model_name);
-	if ($id_update > 0) { $updata = $value['id']; }
-	mkform("_hidden","id",$updata);
-	?>
-	<input type="submit" value="<? t($wizard_model_name,"_go_destroy"); ?>"><?
+	mkform("_hidden","id",$value['id']);
+	mkform("_button","submit",$wizard_model_name,"_go_destroy");
 	mkform();
 	?></th>
 	<? 

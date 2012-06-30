@@ -1,4 +1,4 @@
-<?
+<?php
 function user() {
 	if (isset($_COOKIE['sToken']) or $_COOKIE['sToken'] !== "") {
 		global $wizard_config;

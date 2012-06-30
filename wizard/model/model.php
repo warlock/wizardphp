@@ -1,4 +1,4 @@
-<?
+<?php
 // WizardPHP : Model loader
 $wizard_model_dir = opendir("model");
 $wzd_f_m = 0;

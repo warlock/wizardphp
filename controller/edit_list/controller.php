@@ -1,4 +1,4 @@
-<?
+<?php
 // WizardPHP : Edit List controller...
 $keys = '';
 $makecolumns = '';
@@ -9,11 +9,11 @@ if ($wizard_num_args == 2) {
 }
 ?>
 <TABLE> 
-<TR> <?
+<TR> <?php
 // List of models with their corresponding translations.
 foreach ($wizard_model as $type => $value_type) {
 	if(substr($type,0,1) != '_') {
-		?><TH><? t($wizard_model_name,$type); ?></TH><?
+		?><TH><?php t($wizard_model_name,$type); ?></TH><?php
 					$makecolumns = $type.",".$makecolumns;
 	} else {
 		if($type == "_go_update") {
@@ -32,12 +32,12 @@ foreach ($wizard_model as $type => $value_type) {
 		}
 	}
 }
-?><th></th><th></th></TR><?
+?><th></th><th></th></TR><?php
 // Print the content...
 $finalcolumns = rtrim($makecolumns,",");
 $results = db("SELECT id,".$finalcolumns." FROM ".$wizard_model_name); 
 foreach ( $results as $result ) {
-	?><tr><?
+	?><tr><?php
 	foreach ($wizard_model as $type => $value_type) {
 		if(substr($type,0,1) != '_') {
 			if (is_array($value_type)) {
@@ -56,25 +56,25 @@ foreach ( $results as $result ) {
 		}
 	}
 	// Update and Destroy buttons...
-	if ($wzd_url_mod == '1') {  // Edit button from URL
+	?><td><?php
+	if ($wzd_url_mod == '1') { // Edit button from URL
 		mkform("_open",$result["id"]);
-		mkform("_hidden","action","read");
-		mkform("_hidden","id",$result["id"]);
-		mkform("_button",$wizard_model_name,"_go_update");
-		mkform();
-		/* ?><td><form method="post" action="<? print $result["id"]; ?>">
-		<input type="hidden" name="action" value="read">
-		<input type="hidden" name="id" value="<? print $result["id"]; ?>">
-		<input type="submit" value="<? t($wizard_model_name,"_go_update"); ?>"></form></td><? */
-		
-		
-		
-		
-	} else { // Edit button from URL !
-		?><td><form method="post" action="<? /* print $_go_update; */ print 'edit/'.$result["id"]; ?>"><input type="hidden" name="action" value="read"><input type="hidden" name="id" value="<? print $result["id"]; ?>"><input type="submit" value="<? t($wizard_model_name,"_go_update"); ?>"></form></td><?
-	} // Destroy button
-	?><td><form method="post" action="<? print $_go_destroy; ?>"><input type="hidden" name="action" value="destroy"><input type="hidden" name="form_id" value="<? print $wizard_model_name; ?>"><input type="hidden" name="id" value="<? print $result["id"]; ?>"><input type="submit" value="<? t($wizard_model_name,"_go_destroy"); ?>"></form></td>
-</tr><?
+	} else { // Edit button for scaffolding !
+		mkform("_open","edit/".$result["id"]);
+	}
+	mkform("_hidden","action","read");
+	mkform("_hidden","id",$result["id"]);
+	mkform("_button","submit",$wizard_model_name,"_go_update");
+	mkform();
+	?></td><td><?php
+	// Destroy button!
+	mkform("_open",$_go_destroy);
+	mkform("_hidden","action","destroy");
+	mkform("_hidden","form_id",$wizard_model_name);
+	mkform("_hidden","id",$result["id"]);
+	mkform("_button","submit",$wizard_model_name,"_go_destroy");
+	mkform();
+	?></td></tr><?
 }
 ?>
 </TABLE>

@@ -1,4 +1,4 @@
-<?
+<?php
 // Configuration and models loader.
 $wizard_config = Spyc::YAMLLoad('config/config.yml');
 $language = $wizard_config['language'];

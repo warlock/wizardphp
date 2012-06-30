@@ -1,4 +1,4 @@
-<?
+<?php
 // wizard: POST SYSTEM CATCHER
 $post_send_values = "";
 $input_name = "";
@@ -26,7 +26,7 @@ if (count($_POST) > 1) {
 			// Identify what action is to run
 			switch ($input_name) {
 				case "action":
-					switch ($input_value) { 
+					switch ($input_value) {
 						case "create" :
 							$action = "create"; 
 							$postalt = "insert into ";
@@ -47,10 +47,7 @@ if (count($_POST) > 1) {
 							break;
 						case "logout":
 							$select_login = "delete from sessions where cookie = '".$_COOKIE["sToken"]."'";
-							$db = &ADONewConnection($wizard_config['class']);
-							$db->PConnect($wizard_config['host'],$wizard_config['user'],$wizard_config['password'],$wizard_config['database']);
-							$dbs = $db->Execute($select_login);
-							$db->Close();
+							db($select_login);
 							break;
 					}
 					break;
@@ -100,10 +97,10 @@ if (count($_POST) > 1) {
 						$newsess = "insert into sessions (userid, cookie, time) values ('".$dbs->fields[id]."', '".$_COOKIE[sToken]."', '".time()."')";
 						$db->Execute($newsess);
 						} else {
-							print "<b>Please verify your mail!</b><br>";	
+							t("users","verify");	
 						}
 					} else {
-						print "<b>User or password incorrect!</b><br>";
+						t("users","incorrect");
 					}
 					$db->Close();
 				}
@@ -113,7 +110,7 @@ if (count($_POST) > 1) {
 					$wzd_from = t("mail","from","return");
 					$wzd_title = t("mail","title","return");
 					$wzd_message = t("mail","message","return");
-					$default_level = $wizard_model_complete[users][level];
+					$default_level = $wizard_model_complete["users"]["level"];
 					$expiration = time() + 604800;
 					$postsend = $postsend." (".$post_keys." pass_crypt, mail_crypt, level, activ, expiration) values (".$post_values." '".$passcrypt."', '".$mailcrypt."', '".$default_level."', '0', '".$expiration."')";
 					// Mail verification
@@ -128,25 +125,16 @@ if (count($_POST) > 1) {
 					$post_values = rtrim($post_values,',');
 					$postsend = $postsend." (".$post_keys.") values (".$post_values.")";
 				}
-				$db = &ADONewConnection($wizard_config['class']);
-				$db->PConnect($wizard_config['host'],$wizard_config['user'],$wizard_config['password'],$wizard_config['database']);
-				$db->Execute($postsend);
-				$db->Close();
+				db($postsend);
 				break;
 			case "update":
             	$post_values = rtrim($post_values,',');
     			$postsend = $postsend." set ".$post_values." where id = '".$post_alter."'";
-				$db = &ADONewConnection($wizard_config['class']);
-				$db->PConnect($wizard_config['host'],$wizard_config['user'],$wizard_config['password'],$wizard_config['database']);
-       		    $db->Execute($postsend);
-				$db->Close();
+				db($postsend);
 				break;
 			case "destroy":
 				$postsend = $postsend." where id = '".$post_alter."'";
-				$db = &ADONewConnection($wizard_config['class']);
-				$db->PConnect($wizard_config['host'],$wizard_config['user'],$wizard_config['password'],$wizard_config['database']);
-				$db->Execute($postsend);
-				$db->Close();
+				db($postsend);
 				break;
 		}
 	//CRUD END

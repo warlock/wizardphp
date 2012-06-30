@@ -1,4 +1,4 @@
-<?
+<?php
 // WizardPHP: TRANSLATION SYSTEM
 function t() {
 $numargs = func_num_args();

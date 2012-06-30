@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 	WizardPHP Framework
 	Josep Subils Rigau - mail: jsubils@iberonline.com

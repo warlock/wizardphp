@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 WizardPHP : Select DB Tool
 

@@ -24,6 +24,8 @@ users:
   logout : Logout
   logged_with : Logged with
   user_noexist : User does not exist!
+  verify : Please verify your mail!
+  incorrect : User or password incorrect!
   notmember : You still not a member
   notmember2 : Sing up now!
   verified : User verified

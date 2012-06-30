@@ -50,9 +50,15 @@ function mkform() {
 			<input type="hidden" name="<?php print $class; ?>" value="<?php print $key; ?>">
 			<?php
 		} elseif ($wizard_model_name == "_button") {
-			?>
-			<input type="<?php print $key; ?>" value="<?php t($class,$key); ?>">
-			<?php
+			if ($class == "reset") {
+				?>
+				<input type="reset" value="<?php t($key,$value); ?>">
+				<?php
+			} else {
+				?>
+				<input type="submit" value="<?php t($key,$value); ?>">
+				<?php
+			}
 		} else {
 			include('class.php');
 		}
