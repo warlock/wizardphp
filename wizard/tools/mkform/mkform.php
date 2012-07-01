@@ -37,9 +37,15 @@ function mkform() {
 		}
 		if ($wizard_model_name == "_open") {
 			if(isset($class)) {
-				?>
-				<form method="post" action="<?php print $class; ?>">
-				<?php			
+				if (isset($key)) {
+					?>
+					<form method="post" action="<?php print $class; ?>" id="<?php print $key; ?>">
+					<?php
+				} else {
+					?>
+					<form method="post" action="<?php print $class; ?>">
+					<?php	
+				}		
 			} else {
 				?>
 				<form method="post" action="">

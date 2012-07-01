@@ -13,5 +13,5 @@ if(!isset($_COOKIE["sToken"]) or $_COOKIE["sToken"] == "") {
 	$tokentime = time() + (7 * 86400);
 	setcookie("sToken",$tokenvalue,$tokentime);
 }
-$wzd_url_mod = 0; // URL Modification
+$wzd_url_mod = 0; // Declare URL Modification
 ?>

@@ -46,8 +46,7 @@ if (count($_POST) > 1) {
 							$action = "login";
 							break;
 						case "logout":
-							$select_login = "delete from sessions where cookie = '".$_COOKIE["sToken"]."'";
-							db($select_login);
+							db("delete from sessions where cookie = '".$_COOKIE["sToken"]."'");
 							break;
 					}
 					break;
@@ -86,23 +85,24 @@ if (count($_POST) > 1) {
 		// Executes actions in the database.	
 		switch ($action) {
 			case "login":
-				if (isset($_COOKIE["sToken"])) {
-					$select_login = "select * from users where pass_crypt = '".$passcrypt."' and mail_crypt = '".$mailcrypt."'";
-					$db = &ADONewConnection($wizard_config['class']);
-					$db->PConnect($wizard_config['host'],$wizard_config['user'],$wizard_config['password'],$wizard_config['database']);
-					$dbs = $db->Execute($select_login);
-					if (!$dbs->EOF) {
-						$activ = $dbs->fields[activ];
-						if ($activ == '1') {
-						$newsess = "insert into sessions (userid, cookie, time) values ('".$dbs->fields[id]."', '".$_COOKIE[sToken]."', '".time()."')";
-						$db->Execute($newsess);
-						} else {
-							t("users","verify");	
+				if(!user()) {
+					if (isset($_COOKIE["sToken"])) {
+						if (isset($passcrypt) and isset($mailcrypt)) {
+							$select_login = db("select * from users where pass_crypt = '".$passcrypt."' and mail_crypt = '".$mailcrypt."'");
+							if (is_array($select_login)) {
+								if ($select_login[0]["activ"] == "1") {
+									// Create a session
+									db("insert into sessions (userid, cookie, time) values ('".$select_login[0]["id"]."', '".$_COOKIE[sToken]."', '".time()."')");
+								} else {
+									// Please verify your mail
+									$authret = 2;
+								}
+							} else {
+								// User incorrect!
+								$authret = 1;
+							}
 						}
-					} else {
-						t("users","incorrect");
 					}
-					$db->Close();
 				}
 				break;
 			case "create":

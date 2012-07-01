@@ -1,4 +1,4 @@
-<?
+<?php
 // WizardPHP : Show List controller...
 $keys = '';
 $makecolumns = '';
@@ -10,11 +10,11 @@ if ($wizard_num_args >= 2) {
 }
 ?>
 <TABLE> 
-<TR> <?
+<TR> <?php
 // List of models with their corresponding translations.
 foreach ($wizard_model as $type => $value_type) {
 	if(substr($type,0,1) != '_') {
-		?><TH><? t($wizard_model_name,$type); ?></TH><?
+		?><TH><?php t($wizard_model_name,$type); ?></TH><?php
 					$makecolumns = $type.",".$makecolumns;
 	} else {
 		if($type == "_go_update") {
@@ -34,9 +34,9 @@ foreach ($wizard_model as $type => $value_type) {
 	}
 }
 if ($wzd_url_mod != 0) { // URL Scaffold Modification
-?><th></th><?
+?><th></th><?php
 }
-?></TR><?
+?></TR><?php
 // Print the content...
 $finalcolumns = rtrim($makecolumns,",");
 if (isset($busqueda)) {
@@ -61,7 +61,7 @@ if (isset($busqueda)) {
 }
 $results = db($db_query);
 foreach ($results as $result) {
-	?><tr><?
+	?><tr><?php
 	foreach ($wizard_model as $type => $value_type) {
 		// proves
 		if(substr($type,0,1) != '_') {
@@ -80,13 +80,13 @@ foreach ($results as $result) {
 		}
 	}
 	if ($wzd_url_mod == '1') { // URL Scaffold Modification
-		?><td><a href="<? print $result['id']; ?>"><? t($wizard_model_name,'view'); ?></a></td><?
+		?><td><a href="<?php print $result['id']; ?>"><?php t($wizard_model_name,'view'); ?></a></td><?php
 	} elseif ($wzd_url_mod == '2') {
-		?><td><a href="show/<? print $result['id']; ?>"><? t($wizard_model_name,'view'); ?></a></td><?
+		?><td><a href="show/<?php print $result['id']; ?>"><?php t($wizard_model_name,'view'); ?></a></td><?php
 	} elseif ($wzd_url_mod == '3') {
-		?><td><a href="<? print $wizard_model_name; ?>/show/<? print $result['id']; ?>"><? t($wizard_model_name,'view'); ?></a></td><?
+		?><td><a href="<?php print $wizard_model_name; ?>/show/<?php print $result['id']; ?>"><?php t($wizard_model_name,'view'); ?></a></td><?php
 	} 
-	?></tr><?
+	?></tr><?php
 }
 ?>
 </TABLE>

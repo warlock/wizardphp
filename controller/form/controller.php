@@ -28,10 +28,14 @@ if (isset($post_id)) {
 if(isset($wizard_model['_go_to'])) { 
 	mkform("_open", $wizard_model["_go_to"]);
 } else {
-	if ($wzd_from_seg == "edit_url") {
-		mkform("_open","../edit");
-	} elseif ($wzd_from_seg == "new_url") {
-		mkform("_open","edit");
+	if (isset($wzd_from_seg)) {
+		if ($wzd_from_seg == "edit_url") {
+			mkform("_open","../edit");
+		} elseif ($wzd_from_seg == "new_url") {
+			mkform("_open","edit");
+		} else {
+			mkform("_open");
+		}
 	} else {
 		mkform("_open");
 	}
