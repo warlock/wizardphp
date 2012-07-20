@@ -1,5 +1,5 @@
 <?php
-function mkform() {
+function f() {
 	global $wizard_model_complete;
 	global $wizard_config;
 	global $language;

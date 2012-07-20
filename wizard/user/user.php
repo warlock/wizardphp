@@ -39,13 +39,13 @@ function user() {
 								t("users","verify");
 								break;
 						}
-						mkform("_open");
-						mkform("_hidden","action","login");
-						mkform("_hidden","form_id","users");
-						mkform("users","string","mail");
-						mkform("users","password","password");
-						mkform("_button","submit","users","login");
-						mkform();
+						f("_open","","login");
+						f("_hidden","action","login");
+						f("_hidden","form_id","users");
+						f("users","string","mail");
+						f("users","password","password");
+						f("_button","submit","users","login");
+						f();
 				}
 				break;
 			case "set":

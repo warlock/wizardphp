@@ -1,6 +1,5 @@
 <?
 // WizardPHP : Form Controller
-
 // Identify update post_id
 switch ($wizard_num_args) {
 	case 2:
@@ -26,18 +25,18 @@ if (isset($post_id)) {
 
 // URL that goes after "submit"
 if(isset($wizard_model['_go_to'])) { 
-	mkform("_open", $wizard_model["_go_to"]);
+	f("_open", $wizard_model["_go_to"]);
 } else {
 	if (isset($wzd_from_seg)) {
 		if ($wzd_from_seg == "edit_url") {
-			mkform("_open","../edit");
+			f("_open","../edit");
 		} elseif ($wzd_from_seg == "new_url") {
-			mkform("_open","edit");
+			f("_open","edit");
 		} else {
-			mkform("_open");
+			f("_open");
 		}
 	} else {
-		mkform("_open");
+		f("_open");
 	}
 }
 
@@ -45,21 +44,21 @@ if(isset($wizard_model['_go_to'])) {
 if ($id_update > 0) {  // Show value in form
 	$values = db($wizard_model_name,$id_update);
 	$value = $values[0];
-	mkform("_hidden","action","update");
-	mkform("_hidden","id",$id_update);
+	f("_hidden","action","update");
+	f("_hidden","id",$id_update);
 } else {
 	if (isset($wizard_model["_controller"])) {
 		if ($wizard_model["_controller"] != "") { // Identify when post isn't CRUD
-			mkform("_hidden","action","controller");
-			mkform("_hidden","postcontroller",$wizard_model['_controller']);
+			f("_hidden","action","controller");
+			f("_hidden","postcontroller",$wizard_model['_controller']);
 		} else { // Post is CRUD
-			mkform("_hidden","action","create");
+			f("_hidden","action","create");
 		}
 	} else {
-		mkform("_hidden","action","create");
+		f("_hidden","action","create");
 	}
 }
-mkform("_hidden","form_id",$wizard_model_name);
+f("_hidden","form_id",$wizard_model_name);
 
 // Check the model and prints the results.
 foreach ($wizard_model as $key => $class) {
@@ -71,10 +70,10 @@ foreach ($wizard_model as $key => $class) {
 		case "_button":
 			if (is_array($class)) {
 				foreach ($class as $key2 => $class2) {
-					mkform("_button",$class2,$wizard_model_name,$class2);
+					f("_button",$class2,$wizard_model_name,$class2);
 				}
 			} else {
-				mkform("_button","submit",$wizard_model_name,$class);
+				f("_button","submit",$wizard_model_name,$class);
 			}
 			break;
 		case "level":
@@ -82,33 +81,33 @@ foreach ($wizard_model as $key => $class) {
 			break;
 		default:
 			if (!isset($value)) {
-				mkform($wizard_model_name,$class,$key);
+				f($wizard_model_name,$class,$key);
 			} else {
-				mkform($wizard_model_name,$class,$key,$value,$id_update);
+				f($wizard_model_name,$class,$key,$value,$id_update);
 			}
 	}
 }
-mkform();
+f();
 
 // Button to delete the row when editing.
 if ($id_update>0) {
 	if(isset($wizard_model['_go_destroy'])) {
-		mkform("_open", $wizard_model["_go_destroy"]);
+		f("_open", $wizard_model["_go_destroy"]);
 	} else {
 		print "No hi ha _go_destroy";
 		if ($wzd_from_seg == "edit_url") {
-			mkform("_open","../edit");
+			f("_open","../edit");
 		} elseif ($wzd_from_seg == "new_url") {
-			mkform("_open","edit");
+			f("_open","edit");
 		} else {
-			mkform("_open");
+			f("_open");
 		}
 	}
-	mkform("_hidden","action","destroy");
-	mkform("_hidden","form_id",$wizard_model_name);
-	mkform("_hidden","id",$value['id']);
-	mkform("_button","submit",$wizard_model_name,"_go_destroy");
-	mkform();
+	f("_hidden","action","destroy");
+	f("_hidden","form_id",$wizard_model_name);
+	f("_hidden","id",$value['id']);
+	f("_button","submit",$wizard_model_name,"_go_destroy");
+	f();
 	?></th>
 	<? 
 }

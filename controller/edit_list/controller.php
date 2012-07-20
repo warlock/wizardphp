@@ -58,22 +58,22 @@ foreach ( $results as $result ) {
 	// Update and Destroy buttons...
 	?><td><?php
 	if ($wzd_url_mod == '1') { // Edit button from URL
-		mkform("_open",$result["id"]);
+		f("_open",$result["id"]);
 	} else { // Edit button for scaffolding !
-		mkform("_open","edit/".$result["id"]);
+		f("_open","edit/".$result["id"]);
 	}
-	mkform("_hidden","action","read");
-	mkform("_hidden","id",$result["id"]);
-	mkform("_button","submit",$wizard_model_name,"_go_update");
-	mkform();
+	f("_hidden","action","read");
+	f("_hidden","id",$result["id"]);
+	f("_button","submit",$wizard_model_name,"_go_update");
+	f();
 	?></td><td><?php
 	// Destroy button!
-	mkform("_open",$_go_destroy);
-	mkform("_hidden","action","destroy");
-	mkform("_hidden","form_id",$wizard_model_name);
-	mkform("_hidden","id",$result["id"]);
-	mkform("_button","submit",$wizard_model_name,"_go_destroy");
-	mkform();
+	f("_open",$_go_destroy);
+	f("_hidden","action","destroy");
+	f("_hidden","form_id",$wizard_model_name);
+	f("_hidden","id",$result["id"]);
+	f("_button","submit",$wizard_model_name,"_go_destroy");
+	f();
 	?></td></tr><?
 }
 ?>
