@@ -1,6 +1,7 @@
-Options +FollowSymlinks
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-f
+RewriteEngine On
+
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteBase /
-RewriteRule ^(.*)$ /index.php?wzd_url=$1 [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
