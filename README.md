@@ -1,4 +1,0 @@
-wizardphp
-=========
-
-PHP Framework
