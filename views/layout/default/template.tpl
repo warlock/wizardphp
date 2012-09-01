@@ -16,20 +16,7 @@
 		</div>
 
 		<div id="content">	
-			{if isset($_error)}
-			<div id="error">
-				{$_error}
-			</div>
-			{/if}
-		
-			{if isset($_message)}
-			<div id="message">
-				{$_message}
-			</div>
-			{/if}
-
 			{include file=$_content}
-
 		</div>
 
 		<div id="footer">

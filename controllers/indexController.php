@@ -7,7 +7,7 @@ class indexController extends Controller
 	
 	public function index()
 	{
-		$this->_view->assign('title', 'Welcome');
+		$this->_view->assign('welcome', 'Welcome to Wizard');
 		$this->_view->render('index');
 	}
 }
